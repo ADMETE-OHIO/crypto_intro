@@ -1,3 +1,5 @@
+import matplotlib.pyplot as plt
+
 """
 File: hack.py
 Author: David W. Juedes
@@ -116,6 +118,9 @@ best_password = ""
 progress = 0
 print("Progress on trying all 17576 passwords")
 # Try all possible (17,536) passwords of length 3
+counter = 0
+x = []
+y = []
 for c1 in "abcdefghijklmnopqrstuvwxyz":
     for c2 in "abcdefghijklmnopqrstuvwxyz":
         for c3 in "abcdefghijklmnopqrstuvwxyz":
@@ -133,9 +138,21 @@ for c1 in "abcdefghijklmnopqrstuvwxyz":
                count_chars(ds,"I","i"),count_chars(ds,"O","o"),
                count_chars(ds,"U","u"),count_char(ds," "),len(data)]
             dist = distance(english_list,char_vector)
+            x.append(counter)
+            counter = counter + 1
+            y.append(dist)
             if (dist<best_dist):
                 best_dist = dist
                 best_password = password
     
 print("Winning password = "+best_password)
+
+plt.figure(0,figsize=(12,6))
+plt.plot(x,sorted(y))
+
+plt.figure(1, figsize=(12,6))
+plt.plot(x[0:26],sorted(y)[0:26])
+
+plt.figure(2, figsize=(12,6))
+plt.plot(x,y)
 
